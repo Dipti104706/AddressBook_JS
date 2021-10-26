@@ -1,8 +1,7 @@
 var prompt=require("prompt-sync")();
-//UC2 - Validating person details using regex
+//UC3 - Adding contact in a array
 class Person
 {
-    
     //Getter setter method
     get firstName()
     {
@@ -113,23 +112,46 @@ class Person
         return `First name:${firstName} \nLast name:${lastName} \nAddress: ${address} \nCity:${city} \nState:${state} \nPincode:${pin} \nPhone Number:${phone} \nEmail Id: ${emailId}`;
     }
 }
-//taking user input 
-firstName = prompt('Enter First name : ');
-lastName = prompt('Enter Last name : ');
-address = prompt('Enter Address : ');
-city = prompt('Enter City name : ');
-state = prompt('Enter State name : ');
-pin = prompt('Enter PinCode: ')
-phone = prompt('Enter Phone number :');
-emailId= prompt('Enter EmailId : ');
-//Creating a object of ContactClass
-try
+
+//creating a new array
+var contactArray=new Array();
+//calling createContact
+createContact(contactArray);
+
+//function to create contact 
+function createContact(contactArray)
 {
-    let contact1=new Person(firstName,lastName,address,city,state,pin,phone,emailId);
-    console.log("The contact details are:");
-    console.log(contact1.toString());
+    try
+    {
+        var contact=parseInt(prompt("enter the number of contacts to be added: "));
+        while(contact--)
+        {
+            //getting the input from user 
+            firstName = prompt('Enter First name : ');
+            lastName = prompt('Enter Last name : ');
+            address = prompt('Enter Address : ');
+            city = prompt('Enter City name : ');
+            state = prompt('Enter State name : ');
+            pin = prompt('Enter PinCode: ')
+            phone = prompt('Enter Phone number :');
+            emailId= prompt('Enter EmailId : ');
+            //creating a object 
+            let contact1=new Person(firstName,lastName,address,city,state,pin,phone,emailId);
+            contactArray.push(contact1);
+            displayArray(contact1);
+        }
+    }
+    catch(ex)
+    {
+        console.log(ex);
+    }
 }
-catch(ex)
+
+//Displaying all contact stored in array
+function displayArray(contact)
 {
-    console.error(ex);
+    for(let i=0;i<contact.length;i++)
+    {
+        console.log(contact[i].toString()+"\n");
+    }
 }
