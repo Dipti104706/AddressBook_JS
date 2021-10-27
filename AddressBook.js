@@ -1,5 +1,5 @@
 var prompt=require("prompt-sync")();
-//UC7 - checking for duplicate entry in the address book  
+//UC8 - Search contact based on city or state in the address book  
 class Person
 {
     //Parameterized constructor
@@ -266,6 +266,40 @@ function FindNumberofContact(contact)
     return contact + 1;
 }
 
+//UC-8- Search the contact details based on city or state
+function SearchBasedonStateOrCity(contact)
+{
+    console.log("\nEnter for :\n1-Search based on city \n2-Search based on state \n3-Exit");
+    var opt=prompt("Enter option: ");
+    switch(opt)
+    {
+        case "1":
+            var cityName=prompt("Enter a city name: ");
+            var City=contact.filter(x=>x.city==cityName);
+            if(City.length!=0)
+            {
+                DisplayArray(City);
+            }
+            else
+            {
+                console.log(cityName+" does not exist");
+            }
+        case "2":
+            var stateName=prompt("Enter a state name");
+            var State=contact.filter(x=>x.state==stateName);
+            if(State.length!=0)
+            {
+                DisplayArray(State);
+            }
+            else 
+            {
+                console.log(stateName+" does not exist");
+            }
+        case "3":
+            return;
+    }
+}
+
 //Function for all opeartions like add,edit contact to the adddressbook 
 function operation()
 {
@@ -274,7 +308,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
@@ -294,7 +328,10 @@ function operation()
                 console.log("Total number of contact present in the address book:")
                 console.log(contactArray.reduce(FindNumberofContact, 0));
                 break;
-            case"6":
+            case "6":
+                SearchBasedonStateOrCity(contactArray);
+                break;
+            case"7":
                 return;
             default:
                 console.log("Invalid option!");
