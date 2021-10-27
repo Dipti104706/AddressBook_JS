@@ -1,7 +1,8 @@
 var prompt=require("prompt-sync")();
-//UC4 - Edit existing contact 
+//UC5 - Delete existing contact based on name 
 class Person
 {
+    //Parameterized constructor
     constructor(...params)
     {
         this.firstName=params[0];
@@ -231,6 +232,25 @@ function EditContact(contact)
     }
 }
 
+//Delete the contact using name from the address book
+function DeleteContact(contact)
+{
+    var name = prompt('Enter first name :');
+    for(let i=0;i<contact.length;i++)
+    {
+        if(contact[i].firstName == name)
+        {
+            contact.splice(i,1); //remove object from the specific index
+            console.log("Successfully Deleted Contact");
+            break;
+        }
+        else
+        {
+            console.log("Contact doesn't Exist");
+        }
+    }
+}
+
 //Function for all opeartions like add,edit contact to the adddressbook 
 function operation()
 {
@@ -239,7 +259,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
@@ -252,7 +272,10 @@ function operation()
             case "3":
                 EditContact(contactArray);
                 break;
-            case"4":
+            case "4":
+                DeleteContact(contactArray);
+                break;
+            case"5":
                 return;
             default:
                 console.log("Invalid option!");
