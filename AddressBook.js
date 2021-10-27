@@ -1,5 +1,5 @@
 var prompt=require("prompt-sync")();
-//UC5 - Delete existing contact based on name 
+//UC6 - Find the number of contact present in the address book  
 class Person
 {
     //Parameterized constructor
@@ -232,7 +232,7 @@ function EditContact(contact)
     }
 }
 
-//Delete the contact using name from the address book
+//Uc5 -Delete the contact using name from the address book
 function DeleteContact(contact)
 {
     var name = prompt('Enter first name :');
@@ -251,6 +251,12 @@ function DeleteContact(contact)
     }
 }
 
+//Uc 6-Finding number of contact present in the addressbook
+function FindNumberofContact(contact) 
+{
+    return contact + 1;
+}
+
 //Function for all opeartions like add,edit contact to the adddressbook 
 function operation()
 {
@@ -259,7 +265,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
@@ -275,7 +281,11 @@ function operation()
             case "4":
                 DeleteContact(contactArray);
                 break;
-            case"5":
+            case "5":
+                console.log("Total number of contact present in the address book:")
+                console.log(contactArray.reduce(FindNumberofContact, 0));
+                break;
+            case"6":
                 return;
             default:
                 console.log("Invalid option!");
