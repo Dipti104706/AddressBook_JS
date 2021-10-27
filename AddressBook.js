@@ -1,5 +1,5 @@
 var prompt=require("prompt-sync")();
-//UC6 - Find the number of contact present in the address book  
+//UC7 - checking for duplicate entry in the address book  
 class Person
 {
     //Parameterized constructor
@@ -134,20 +134,29 @@ function AddContact(array)
         var contact=parseInt(prompt("Enter the number of contacts to be added: "));
         while(contact>0)
         {
-            console.log("Add details for contact-"+contact);
+            console.log("Add details for contact-"+contact);        
             //getting the input from user 
             firstName = prompt('Enter First name : ');
-            lastName = prompt('Enter Last name : ');
-            address = prompt('Enter Address : ');
-            city = prompt('Enter City name : ');
-            state = prompt('Enter State name : ');
-            pin = prompt('Enter PinCode: ')
-            phone = prompt('Enter Phone number :');
-            emailID= prompt('Enter EmailId : ');
-            //creating a object 
-            let contact1=new Person(firstName,lastName,address,city,state,pin,phone,emailID)
-            array.push(contact1);    
-            contact--; 
+            //checking for duplicate entry in the address book
+            let unique=array.filter(x=>x.firstName==firstName);
+            if(unique.length==0) //if unique contains any value that maens that first name already exists
+            {
+                lastName = prompt('Enter Last name : ');
+                address = prompt('Enter Address : ');
+                city = prompt('Enter City name : ');
+                state = prompt('Enter State name : ');
+                pin = prompt('Enter PinCode: ')
+                phone = prompt('Enter Phone number :');
+                emailID= prompt('Enter EmailId : ');
+                //creating a object 
+                let contact1=new Person(firstName,lastName,address,city,state,pin,phone,emailID)
+                array.push(contact1);    
+                contact--; 
+            }
+            else
+            {
+                console.log("Contact name already exist");
+            }    
         }
     }
     catch(ex)
