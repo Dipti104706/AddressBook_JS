@@ -325,15 +325,42 @@ function ViewByCityAndState(contactArray)
         array2.push(contact);
         state.set(contact.state,array2);
     })
-    console.log("Iterating Contacts based on city:");
-    for(let [key,value] of city){
-        console.log("The contacts in city "+key);
-        DisplayArray(value);
-    }
-    console.log("Iterating Contacts based on state:");
-    for(let [key,value] of state){
-        console.log("The contacts in state "+key);
-        DisplayArray(value);
+    console.log("\nEnter for :\n1-View contact based on city \n2-View contact based on state \n3-Count contact based on city \n4-Countcontact based on state \n5-Exit");
+    var opt=prompt("Enter option: ");
+    switch(opt)
+    {
+        case "1":
+            console.log("Iterating Contacts based on city:");
+            for(let [key,value] of city)
+            {
+                console.log("The contacts in city "+key);
+                DisplayArray(value);
+            }
+            break;
+        case "2":
+            console.log("Iterating Contacts based on state:");
+            for(let [key,value] of state)
+            {
+                console.log("The contacts in state "+key);
+                DisplayArray(value);
+            }
+            break;
+        case "3":
+            for(let [key,value] of city)
+            {
+                //Uc10 counting contacts based on city
+                console.log("There are " +value.length+ " contacts in city "+key);
+            }
+            break;
+        case "4":
+            for(let [key,value] of city)
+            {
+                //Uc10 counting contacts based on state
+                console.log("There are " +value.length+ " contacts in state "+key);
+            }
+            break;
+        case "5":
+            return;
     }
 }
 
@@ -345,7 +372,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View contact based on city or state \n8-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View and Count contact based on city or state \n8-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
