@@ -374,6 +374,36 @@ function SortingNameAlphabatically(contact)
     DisplayArray(contact);
 }
 
+//UC12-->Sorting based on city or state or zip
+function SortingBasedOnCityOrStateOrZip(contact)
+{
+    console.log("Enter: \n1-Sort based on city \n2-Sort based on state \n3-Sort based on zip");
+    var option=prompt("\nEnter a option:");
+    switch(option)
+    {
+        case "1":
+            contact.sort(function (x, y) {
+                return x.city == y.city ? 0 : x.city > y.city ? 1 : -1;
+            });
+            DisplayArray(contact);
+            break;
+        case "2":
+            contact.sort(function (x, y) {
+                return x.state == y.state ? 0 : x.state > y.state ? 1 : -1;
+            });
+            DisplayArray(contact);
+            break;
+        case "3":
+            contact.sort(function (x, y) {
+                return x.pin == y.pin ? 0 : x.pin > y.pin ? 1 : -1;
+            });
+            DisplayArray(contact);
+            break;
+        case "4":
+            return;
+    }
+}
+
 //Function for all opeartions like add,edit contact to the adddressbook 
 function operation()
 {
@@ -382,7 +412,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View and Count contact based on city or state \n8-Sort contacts based on name alphabatically \n9-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View and Count contact based on city or state \n8-Sort contacts based on name alphabatically \n9-Sort contacts based on city,state or zip \n10-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
@@ -412,6 +442,9 @@ function operation()
                 SortingNameAlphabatically(contactArray);
                 break;
             case "9":
+                SortingBasedOnCityOrStateOrZip(contactArray);
+                break;
+            case "10":
                 return;
             default:
                 console.log("Invalid option!");
