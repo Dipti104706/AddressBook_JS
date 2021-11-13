@@ -285,7 +285,7 @@ function SearchBasedonStateOrCity(contact)
                 console.log(cityName+" does not exist");
             }
         case "2":
-            var stateName=prompt("Enter a state name");
+            var stateName=prompt("Enter a state name:");
             var State=contact.filter(x=>x.state==stateName);
             if(State.length!=0)
             {
@@ -300,6 +300,43 @@ function SearchBasedonStateOrCity(contact)
     }
 }
 
+//UC9 view contact by city and state
+function ViewByCityAndState(contactArray)
+{
+    //creating a map for city an state
+    var city = new Map();
+    var state = new Map();
+    contactArray.forEach(contact =>
+    {
+        //For city
+        var array1 = new Array();
+        if(city.has(contact.city))
+        {
+            array1 = city.get(contact.city);    
+        }
+        array1.push(contact);
+        city.set(contact.city,array1);
+        //For state
+        var array2 = new Array();
+        if(state.has(contact.state))
+        {
+            array2 = state.get(contact.state);       
+        }
+        array2.push(contact);
+        state.set(contact.state,array2);
+    })
+    console.log("Iterating Contacts based on city:");
+    for(let [key,value] of city){
+        console.log("The contacts in city "+key);
+        DisplayArray(value);
+    }
+    console.log("Iterating Contacts based on state:");
+    for(let [key,value] of state){
+        console.log("The contacts in state "+key);
+        DisplayArray(value);
+    }
+}
+
 //Function for all opeartions like add,edit contact to the adddressbook 
 function operation()
 {
@@ -308,7 +345,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View contact based on city or state \n8-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
@@ -331,7 +368,10 @@ function operation()
             case "6":
                 SearchBasedonStateOrCity(contactArray);
                 break;
-            case"7":
+            case "7":
+                ViewByCityAndState(contactArray);
+                break;
+            case "8":
                 return;
             default:
                 console.log("Invalid option!");
