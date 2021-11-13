@@ -364,6 +364,16 @@ function ViewByCityAndState(contactArray)
     }
 }
 
+//uc-11 Sort entries based on name by alphabatically
+function SortingNameAlphabatically(contact)
+{
+    //contact.sort(internal compare function written compare between two and return according)
+    contact.sort(function (x, y) {
+        return x.firstName == y.firstName ? 0 : x.firstName > y.firstName ? 1 : -1;
+    });
+    DisplayArray(contact);
+}
+
 //Function for all opeartions like add,edit contact to the adddressbook 
 function operation()
 {
@@ -372,7 +382,7 @@ function operation()
     var contactArray=new Array();
     while(true)
     {
-        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View and Count contact based on city or state \n8-Exit");
+        console.log("Enter the operation you want to perform: \n1-Add details to addressbook \n2-Display all contacts \n3-Modify existing contact \n4-Delete specific contact \n5-Find number of contacts \n6-Search person by city and state \n7-View and Count contact based on city or state \n8-Sort contacts based on name alphabatically \n9-Exit");
         var op=prompt("Enter the option:")
         switch(op)
         {
@@ -399,6 +409,9 @@ function operation()
                 ViewByCityAndState(contactArray);
                 break;
             case "8":
+                SortingNameAlphabatically(contactArray);
+                break;
+            case "9":
                 return;
             default:
                 console.log("Invalid option!");
